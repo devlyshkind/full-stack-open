@@ -7,6 +7,9 @@ const Button = ({ name, onClick }) => <button onClick={onClick}>{name}</button>;
 const Display = ({ name, value }) => <p>{`${name} ${value}`}</p>;
 
 const Stats = ({ stats }) => {
+  if (stats.countAll === 0) {
+    return <Title name="statistics" />;
+  }
   return (
     <>
       <Title name="statistics" />
