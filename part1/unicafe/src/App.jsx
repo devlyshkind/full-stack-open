@@ -6,6 +6,21 @@ const Button = ({ name, onClick }) => <button onClick={onClick}>{name}</button>;
 
 const Display = ({ name, value }) => <p>{`${name} ${value}`}</p>;
 
+const Stats = ({ stats }) => {
+  return (
+    <>
+      <Title name="statistics" />
+
+      <Display name="good" value={stats.countGood} />
+      <Display name="neutral" value={stats.countNeutral} />
+      <Display name="bad" value={stats.countBad} />
+      <Display name="all" value={stats.countAll} />
+      <Display name="average" value={stats.average} />
+      <Display name="positive" value={stats.positivePercentage} />
+    </>
+  );
+};
+
 const App = () => {
   const [countGood, setCountGood] = useState(0);
   const [countNeutral, setCountNeutral] = useState(0);
@@ -14,6 +29,15 @@ const App = () => {
   const countAll = countGood + countNeutral + countBad;
   const average = (countGood - countBad) / countAll;
   const positivePercentage = (countGood * 100) / countAll;
+
+  const stats = {
+    countGood,
+    countNeutral,
+    countBad,
+    countAll,
+    average,
+    positivePercentage,
+  };
 
   const handleGoodButton = () => setCountGood((s) => s + 1);
   const handleNeutralButton = () => setCountNeutral((s) => s + 1);
@@ -27,14 +51,7 @@ const App = () => {
       <Button name="neutral" onClick={handleNeutralButton} />
       <Button name="bad" onClick={handleBadButton} />
 
-      <Title name="statistics" />
-
-      <Display name="good" value={countGood} />
-      <Display name="neutral" value={countNeutral} />
-      <Display name="bad" value={countBad} />
-      <Display name="all" value={countAll} />
-      <Display name="average" value={average} />
-      <Display name="positive" value={positivePercentage} />
+      <Stats stats={stats} />
     </main>
   );
 };
