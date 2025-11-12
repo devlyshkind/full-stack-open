@@ -19,12 +19,13 @@ const StatisticLine = ({ name, value }) => (
   </tr>
 );
 
+// to represent the stats obtained from the app's feedback
 const Stats = ({ stats }) => {
   if (stats.countAll === 0) {
     return <Title name="statistics" />;
   }
   return (
-    <>
+    <section>
       <Title name="statistics" />
 
       <Table>
@@ -35,7 +36,7 @@ const Stats = ({ stats }) => {
         <StatisticLine name="average" value={stats.average} />
         <StatisticLine name="positive" value={stats.positivePercentage} />
       </Table>
-    </>
+    </section>
   );
 };
 
