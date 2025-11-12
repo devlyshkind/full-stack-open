@@ -11,6 +11,10 @@ const App = () => {
   const [countNeutral, setCountNeutral] = useState(0);
   const [countBad, setCountBad] = useState(0);
 
+  const countAll = countGood + countNeutral + countBad;
+  const average = (countGood - countBad) / countAll;
+  const positivePercentage = (countGood * 100) / countAll;
+
   const handleGoodButton = () => setCountGood((s) => s + 1);
   const handleNeutralButton = () => setCountNeutral((s) => s + 1);
   const handleBadButton = () => setCountBad((s) => s + 1);
@@ -28,6 +32,9 @@ const App = () => {
       <Display name="good" value={countGood} />
       <Display name="neutral" value={countNeutral} />
       <Display name="bad" value={countBad} />
+      <Display name="all" value={countAll} />
+      <Display name="average" value={average} />
+      <Display name="positive" value={positivePercentage} />
     </main>
   );
 };
