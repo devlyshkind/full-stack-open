@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const Title = ({ name }) => <h2>{name}</h2>;
+
 const Button = ({ name, onClick }) => <button onClick={onClick}>{name}</button>;
 
 const App = () => {
@@ -22,6 +24,14 @@ const App = () => {
   // produces a random int from 0 to max - 1
   const getRandomInt = (max) => Math.floor(Math.random() * max);
 
+  const maxVotes = Math.max(...votes);
+
+  // produces the index of the anecdote with more votes
+  // a tie produces the first of the anecdote in the tie
+  const getMoreVoted = () => votes.indexOf(Math.max(...votes));
+
+  const anecdoteMostVoted = getMoreVoted();
+
   // Selects an anecdote at random
   const handleNextAnecdote = () => setSelected(getRandomInt(anecdotes.length));
 
@@ -35,11 +45,18 @@ const App = () => {
   };
 
   return (
-    <section>
-      <p>{anecdotes[selected]}</p>
-      <Button name="next anecdote" onClick={handleNextAnecdote} />
-      <Button name="vote" onClick={handleVote} />
-    </section>
+    <main>
+      <section>
+        <Title name="Anecdote of the day" />
+        <p>{anecdotes[selected]}</p>
+        <Button name="vote" onClick={handleVote} />
+        <Button name="next anecdote" onClick={handleNextAnecdote} />
+      </section>
+      <section>
+        <Title name="Anecdote with most votes" />
+        <p>{`"${anecdotes[anecdoteMostVoted]}" has ${maxVotes} votes`}</p>
+      </section>
+    </main>
   );
 };
 
